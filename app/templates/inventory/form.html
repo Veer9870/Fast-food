@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ 'Edit Product' if product else 'Add New Product' }}</h1>
+    <a href="{{ url_for('inventory.index') }}" class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="POST">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Product Code</label>
+                    <input type="text" class="form-control" name="code" value="{{ product.code if product else '' }}"
+                        required>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ product.name if product else '' }}"
+                        required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" name="category">
+                        <option value="Snacks" {% if product and product.category=='Snacks' %}selected{% endif %}>Snacks
+                        </option>
+                        <option value="Beverages" {% if product and product.category=='Beverages' %}selected{% endif %}>
+                            Beverages</option>
+                        <option value="Sweets" {% if product and product.category=='Sweets' %}selected{% endif %}>Sweets
+                        </option>
+                        <option value="Dairy" {% if product and product.category=='Dairy' %}selected{% endif %}>Dairy
+                        </option>
+                        <option value="Raw Material" {% if product and product.category=='Raw Material' %}selected{%
+                            endif %}>Raw Material</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Brand</label>
+                    <input type="text" class="form-control" name="brand" value="{{ product.brand if product else '' }}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Unit</label>
+                    <select class="form-select" name="unit">
+                        <option value="Pkt" {% if product and product.unit=='Pkt' %}selected{% endif %}>Packet (Pkt)
+                        </option>
+                        <option value="Box" {% if product and product.unit=='Box' %}selected{% endif %}>Box</option>
+                        <option value="Kg" {% if product and product.unit=='Kg' %}selected{% endif %}>Kg</option>
+                        <option value="Ltr" {% if product and product.unit=='Ltr' %}selected{% endif %}>Ltr</option>
+                        <option value="Pc" {% if product and product.unit=='Pc' %}selected{% endif %}>Piece</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Cost Price</label>
+                    <input type="number" step="0.01" class="form-control" name="cost_price"
+                        value="{{ product.cost_price if product else '' }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Selling Price</label>
+                    <input type="number" step="0.01" class="form-control" name="selling_price"
+                        value="{{ product.selling_price if product else '' }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">GST %</label>
+                    <input type="number" step="0.01" class="form-control" name="gst_percent"
+                        value="{{ product.gst_percent if product else '18' }}">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Current Stock</label>
+                    <input type="number" class="form-control" name="stock_quantity"
+                        value="{{ product.stock_quantity if product else '0' }}" {% if product and not
+                        current_user.has_role('super_admin') %}readonly{% endif %}>
+                    <small class="text-muted">Initial stock only.</small>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Min Stock Alert Level</label>
+                    <input type="number" class="form-control" name="min_stock_alert"
+                        value="{{ product.min_stock_alert if product else '10' }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Warehouse Location</label>
+                    <input type="text" class="form-control" name="warehouse_location"
+                        value="{{ product.warehouse_location if product else '' }}">
+                </div>
+
+                <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i> Save Product
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

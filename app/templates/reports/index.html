@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Reports & Analytics</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-boxes fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Inventory Report</h5>
+                <p class="card-text">Current stock levels, valuation, and low stock items.</p>
+                <a href="{{ url_for('reports.export_csv', type='inventory') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-file-excel me-2"></i> Download Excel
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-shopping-cart fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Sales Report</h5>
+                <p class="card-text">Sales history, revenue analysis, and customer trends.</p>
+                <a href="{{ url_for('reports.export_csv', type='sales') }}" class="btn btn-outline-success">
+                    <i class="fas fa-file-excel me-2"></i> Download Excel
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-truck fa-3x text-warning mb-3"></i>
+                <h5 class="card-title">Purchase Report</h5>
+                <p class="card-text">Purchase history, supplier performance, and expense tracking.</p>
+                <a href="{{ url_for('reports.export_csv', type='purchase') }}" class="btn btn-outline-warning">
+                    <i class="fas fa-file-excel me-2"></i> Download Excel
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Email Notifications Section -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-envelope me-2"></i> Email Notifications</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-3">
+                    <strong>📧 Configured Email:</strong> vp2524267@gmail.com<br>
+                    <strong>✅ Status:</strong> <span class="badge bg-success">Active</span>
+                </p>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <div class="card border-primary">
+                            <div class="card-body text-center">
+                                <i class="fas fa-paper-plane fa-2x text-primary mb-2"></i>
+                                <h6>Test Email</h6>
+                                <p class="small text-muted">Send low stock alert test</p>
+                                <a href="{{ url_for('reports.test_email') }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-vial"></i> Send Test
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <div class="card border-success">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-day fa-2x text-success mb-2"></i>
+                                <h6>Daily Summary</h6>
+                                <p class="small text-muted">Send today's report now</p>
+                                <a href="{{ url_for('reports.send_daily_summary') }}" class="btn btn-success btn-sm">
+                                    <i class="fas fa-chart-line"></i> Send Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <div class="card border-info">
+                            <div class="card-body text-center">
+                                <i class="fas fa-info-circle fa-2x text-info mb-2"></i>
+                                <h6>Auto Notifications</h6>
+                                <p class="small text-muted">Purchase & Sales orders</p>
+                                <span class="badge bg-success">Enabled</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-3 mb-0">
+                    <strong>💡 Tip:</strong> Emails are automatically sent when you create purchase/sales orders.
+                    Low stock alerts trigger when viewing the dashboard. Use the buttons above to test manually!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,4 +3,6 @@ __pycache__/
 *.pyc
 .gemini/
 brain/
-.agent/
+.venv/
+erp.db
+
